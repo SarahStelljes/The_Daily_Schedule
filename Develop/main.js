@@ -1,7 +1,13 @@
 var tasks = [];
+// var date = new Date();
+// var year = date.getFullYear();
+// var month = date.getMonth();
+// var day = date.getDate();
+
+// var date = ((''+day).length<2 ? '0':'')
 
 // display the date function
-var getDate = function(){
+var displayDate = function(){
     // get the current date
     var d = new Date();
 
@@ -22,27 +28,73 @@ var getDate = function(){
 };
 
 // load the tasks from storage
-var loadDailyTasks = function(){
-    tasks = JSON.parse(localStorage.getItem("tasks"));
+var loadDailyTasks = function(event){
+
+    tasks = JSON.parse(localStorage.getItem(".description"));
 
     // if there are no tasks in storage...
     if(!tasks){
-        tasks = {
-            AM_9: [],
-            AM_10: [],
-            AM_11: [],
-            PM_12: [],
-            PM_1: [],
-            PM_2: [],
-            PM_3: [],
-            PM_4: [],
-            PM_5: []
-        };
+        tasks = [];
     }
+
+    // loop over object properties
+    // $(".time-block").each(tasks, function(){
+    //     console.log(tasks);
+    // });
+    
 };
 
-loadDailyTasks();
-getDate();
+$("#hour-9 .description").val(localStorage.getItem("hour-9"));
+
+var saveTasks = function(){
+    $(".save-btn").on("click", function(){
+        var value = $(this)
+        .siblings(".description")
+        .val();
+
+        var time = $(this)
+        .parent()
+        .attr("id");
+        localStorage.setItem(time, value);
+    });
+};
+
+var updateHour = function(){
+    var currentHour = moment().hours();
+    $(".time-block").each(function(){
+        var hourBlock = parseInt(
+            $(this)
+            .attr("id")
+            .split("-")[1]
+        );
+        if(hourBlock < currentHour){
+            $(this).addClass("past");
+        }
+        else if(hourBlock === currentHour){
+            $(this).removeClass("past");
+            $(this).addClass("present");
+        }
+        else{
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+            $(this).addClass("future");
+        }
+    });
+}
+
+updateHour();
+
+// var date = new Date();
+// var time = ;
+// var time = moment(date, "L").set("hour", date.getHours)
+// console.log(date.getHours());
+
+// loadDailyTasks();
+displayDate();
+saveTasks();
+// createTimeBlocks();
+
 setInterval(function(){
-    getDate();
+    displayDate();
+    updateHour();
 }, (1000 * 60) * 10);
