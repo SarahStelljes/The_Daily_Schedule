@@ -8,5 +8,8 @@ A web app to keep track of your schedule for the day.
 * CSS
 * JavaScript
 
+## Image
+![image](./The_Daily_Schedule-img.JPG)
+
 ## Live Link
 https://sarahstelljes.github.io/The_Daily_Schedule/
