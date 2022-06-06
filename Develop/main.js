@@ -1,6 +1,6 @@
 // tasks array
 var tasks = [];
-
+// hour num for loading tasks
 var hourNum = document.querySelectorAll(".time-block");
 
 
@@ -27,10 +27,11 @@ var loadDailyTasks = function(){
         tasks = taskInStorage;
         // for however many time blocks there are in the html...
         for(var i = 0; i < hourNum.length; i++){
-            // get the number of what the
             var v = i + 9;
             var theTime = "hour-"+v;
+            // for however many items are within the tasks array
             for(var e = 0; e < tasks.length; e++){
+                // if item in tasks array equals a certain time, then add the task into the field.
                 if(tasks[e].time === theTime){
                     $("#"+theTime+" .description").val(tasks[e].value);
                 }
