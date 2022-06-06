@@ -9,3 +9,4 @@ A web app to keep track of your schedule for the day.
 * JavaScript
 
 ## Live Link
+https://sarahstelljes.github.io/The_Daily_Schedule/
